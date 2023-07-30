@@ -6,9 +6,7 @@ import { Loader } from './Loader';
 import { Modal } from './Modal';
 import { fetchImages } from './js/fetchImages';
 import ImageFinderCSS from './styles/ImageFinder.module.css';
-/**
- * Hello Universe!
- */
+
 export class App extends Component {
   state = {
     images: [],
