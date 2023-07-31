@@ -9,6 +9,8 @@ const useKeyDown = (event, eventFunction) => {
 };
 
 export const Modal = ({ eventFunction, imageLink }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
   const handleClick = event => {
     if (event.target.className === ModalCSS.Overlay) {
       eventFunction();
@@ -26,11 +28,13 @@ export const Modal = ({ eventFunction, imageLink }) => {
   );
 
   return (
-    <div onClick={handleClick} className={ModalCSS.Overlay}>
-      <div className={ModalCSS.Modal}>
-        <img src={imageLink} alt="" />
+    isOpen && (
+      <div onClick={handleClick} className={ModalCSS.Overlay}>
+        <div className={ModalCSS.Modal}>
+          <img src={imageLink} alt="" />
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
