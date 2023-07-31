@@ -3,7 +3,7 @@ import Icons from './images/icons.svg';
 import propTypes from 'prop-types';
 
 export const Searchbar = () => {
-  enterSearchData = event => {
+  const enterSearchData = event => {
     event.preventDefault();
 
     const searchData = event.currentTarget.elements.searchInput.value;
@@ -14,7 +14,7 @@ export const Searchbar = () => {
 
   return (
     <header className={SearchbarCSS.Searchbar}>
-      <form className={SearchbarCSS.SearchForm} onSubmit={this.enterSearchData}>
+      <form className={SearchbarCSS.SearchForm} onSubmit={enterSearchData}>
         <button type="submit" className={SearchbarCSS.SearchFormButton}>
           <svg className={SearchbarCSS.SearchFormButtonIcon}>
             <use xlinkHref={`${Icons}#icon-search`}></use>
