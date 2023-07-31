@@ -17,7 +17,7 @@ export const App = () => {
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [modalImageLink, setModalImageLink] = useState('');
-  const [prevPage, setPrevPage] = useState('');
+  const [prevPage, setPrevPage] = useState(1);
   const [prevSearchResult, setPrevSearchResult] = useState('');
 
   const getSearchResults = searchResultData => {
@@ -25,7 +25,7 @@ export const App = () => {
     setPrevSearchResult(searchResult);
     setSearchResult(searchResultData);
     setImages([]);
-    setPage('');
+    setPage(1);
   };
 
   useEffect(() => {
