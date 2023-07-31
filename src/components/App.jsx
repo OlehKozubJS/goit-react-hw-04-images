@@ -36,25 +36,12 @@ export const App = () => {
     setSearchResult(searchResultData);
     setImages([]);
     setPage(1);
-    fetchData();
   };
 
-  /*
   useEffect(() => {
     fetchData();
-  }, [
-    isLoading,
-    searchResult,
-    page,
-    images,
-    isLoadMore,
-    totalHits,
-    isError,
-    prevPage,
-    prevSearchResult,
-    fetchData,
-  ]);
-*/
+  }, [searchResult, page]);
+
   const openModal = largeImageLink => {
     setIsModal(true);
     setModalImageLink(largeImageLink);
