@@ -18,20 +18,6 @@ export const App = () => {
   const [isModal, setIsModal] = useState(false);
   const [modalImageLink, setModalImageLink] = useState('');
 
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      let imagesData = await fetchImages(searchResult, page);
-      setImages([...images, ...imagesData.hits]);
-      setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
-      setTotalHits(imagesData.totalHits);
-    } catch (error) {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const getSearchResults = searchResultData => {
     setSearchResult(searchResultData);
     setImages([]);
@@ -39,6 +25,19 @@ export const App = () => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        let imagesData = await fetchImages(searchResult, page);
+        setImages([...images, ...imagesData.hits]);
+        setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
+        setTotalHits(imagesData.totalHits);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     fetchData();
   }, [searchResult, page]);
 
