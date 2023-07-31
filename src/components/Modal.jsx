@@ -1,13 +1,17 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import ModalCSS from './styles/Modal.module.css';
 import propTypes from 'prop-types';
 
-export const Modal = ({eventFunction, imageLink}) => {
-  useEffect(() => document.addEventListener('keydown', handleKeyDown.bind(this)), []); 
+export const Modal = ({ eventFunction, imageLink }) => {
+  useEffect(
+    () => document.addEventListener('keydown', handleKeyDown.bind(this)),
+    []
+  );
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', handleKeyDown.bind(this));
-  }
+  useEffect(
+    () => document.removeEventListener('keydown', handleKeyDown.bind(this)),
+    [handleKeyDown]
+  );
 
   const handleKeyDown = event => {
     if (event.key === 'Escape') {
@@ -28,7 +32,7 @@ export const Modal = ({eventFunction, imageLink}) => {
       </div>
     </div>
   );
-}
+};
 
 Modal.propTypes = {
   eventFunction: propTypes.func.isRequired,
