@@ -2,10 +2,8 @@ import { Component } from 'react';
 import ModalCSS from './styles/Modal.module.css';
 import propTypes from 'prop-types';
 
-export class Modal extends Component {
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown.bind(this));
-  }
+export const Modal = ({eventFunction, imageLink}) => {
+  useEffect(() => document.addEventListener('keydown', this.handleKeyDown.bind(this)), []); 
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown.bind(this));
@@ -23,15 +21,13 @@ export class Modal extends Component {
     }
   };
 
-  render() {
-    return (
-      <div onClick={this.handleClick} className={ModalCSS.Overlay}>
-        <div className={ModalCSS.Modal}>
-          <img src={this.props.imageLink} alt="" />
-        </div>
+  return (
+    <div onClick={this.handleClick} className={ModalCSS.Overlay}>
+      <div className={ModalCSS.Modal}>
+        <img src={this.props.imageLink} alt="" />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 Modal.propTypes = {

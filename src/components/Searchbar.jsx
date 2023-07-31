@@ -2,12 +2,12 @@ import SearchbarCSS from './styles/Searchbar.module.css';
 import Icons from './images/icons.svg';
 import propTypes from 'prop-types';
 
-export const Searchbar = () => {
+export const Searchbar = ({ submitFunction }) => {
   const enterSearchData = event => {
     event.preventDefault();
 
     const searchData = event.currentTarget.elements.searchInput.value;
-    this.props.submitFunction(searchData);
+    submitFunction(searchData);
 
     event.currentTarget.reset();
   };
