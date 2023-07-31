@@ -24,18 +24,21 @@ export const App = () => {
     setPage('');
   };
 
-  useEffect(async () => {
-    setIsLoading(true);
-    try {
-      let imagesData = await fetchImages(searchResult, page);
-      setImages([...images, ...imagesData.hits]);
-      setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
-      setTotalHits(imagesData.totalHits);
-    } catch (error) {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        let imagesData = await fetchImages(searchResult, page);
+        setImages([...images, ...imagesData.hits]);
+        setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
+        setTotalHits(imagesData.totalHits);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
+    fetchData();
   }, [isLoading, searchResult, page, images, isLoadMore, totalHits, isError]);
 
   const openModal = largeImageLink => {
