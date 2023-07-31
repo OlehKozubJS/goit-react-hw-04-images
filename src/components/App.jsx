@@ -24,26 +24,28 @@ export const App = () => {
     setPrevPage(page);
     setPrevSearchResult(searchResult);
     setSearchResult(searchResultData);
+    fetchData();
     setImages([]);
     setPage(1);
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      if (page !== prevPage || searchResult !== prevSearchResult) {
-        setIsLoading(true);
-        try {
-          let imagesData = await fetchImages(searchResult, page);
-          setImages([...images, ...imagesData.hits]);
-          setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
-          setTotalHits(imagesData.totalHits);
-        } catch (error) {
-          setIsError(true);
-        } finally {
-          setIsLoading(false);
-        }
+  const fetchData = async () => {
+    if (page !== prevPage || searchResult !== prevSearchResult) {
+      setIsLoading(true);
+      try {
+        let imagesData = await fetchImages(searchResult, page);
+        setImages([...images, ...imagesData.hits]);
+        setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
+        setTotalHits(imagesData.totalHits);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     }
+  };
+  /*
+  useEffect(() => {
     fetchData();
   }, [
     isLoading,
@@ -55,8 +57,9 @@ export const App = () => {
     isError,
     prevPage,
     prevSearchResult,
+    fetchData,
   ]);
-
+*/
   const openModal = largeImageLink => {
     setIsModal(true);
     setModalImageLink(largeImageLink);
