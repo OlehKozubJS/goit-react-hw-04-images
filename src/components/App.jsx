@@ -17,31 +17,25 @@ export const App = () => {
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [modalImageLink, setModalImageLink] = useState('');
-  const [prevPage, setPrevPage] = useState(1);
-  const [prevSearchResult, setPrevSearchResult] = useState('');
 
   const getSearchResults = searchResultData => {
-    setPrevPage(page);
-    setPrevSearchResult(searchResult);
     setSearchResult(searchResultData);
-    fetchData();
     setImages([]);
     setPage(1);
+    fetchData();
   };
 
   const fetchData = async () => {
-    if (page !== prevPage || searchResult !== prevSearchResult) {
-      setIsLoading(true);
-      try {
-        let imagesData = await fetchImages(searchResult, page);
-        setImages([...images, ...imagesData.hits]);
-        setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
-        setTotalHits(imagesData.totalHits);
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
+    setIsLoading(true);
+    try {
+      let imagesData = await fetchImages(searchResult, page);
+      setImages([...images, ...imagesData.hits]);
+      setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
+      setTotalHits(imagesData.totalHits);
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
   /*
