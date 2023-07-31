@@ -1,16 +1,18 @@
-//import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ModalCSS from './styles/Modal.module.css';
 import propTypes from 'prop-types';
 
 export const Modal = ({ eventFunction, imageLink }) => {
+  useEffect();
+
   const handleKeyDown = event => {
     if (event.key === 'Escape') {
       eventFunction();
       console.log('Hey!');
-      document.removeEventListener('keydown', handleKeyDown);
     }
   };
   document.addEventListener('keydown', handleKeyDown);
+  document.removeEventListener('keydown', handleKeyDown);
 
   const handleClick = event => {
     if (event.target.className === ModalCSS.Overlay) {
