@@ -8,6 +8,7 @@ import ImageFinderCSS from './styles/ImageFinder.module.css';
 import { useState, useEffect } from 'react';
 
 export const App = () => {
+  const [isFirstRender, setIsFirstRender] = useState(true);
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -22,9 +23,13 @@ export const App = () => {
     setSearchResult(searchResultData);
     setImages([]);
     setPage(1);
+    setIsFirstRender(false);
   };
 
   useEffect(() => {
+    if (isFirstRender) {
+      return;
+    }
     const fetchData = async () => {
       setIsLoading(true);
       try {
