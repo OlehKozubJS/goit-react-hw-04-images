@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import ModalCSS from './styles/Modal.module.css';
 import propTypes from 'prop-types';
 
-export const Modal = ({ eventFunction, imageLink }) => {
-  const handleKeyDown = event => {
-    if (event.key === 'Escape') {
-      eventFunction();
-    }
-  };
+const useKeyDown = (event, eventFunction) => {
+  if (event.key === 'Escape') {
+    eventFunction();
+  }
+};
 
+export const Modal = ({ eventFunction, imageLink }) => {
   const handleClick = event => {
     if (event.target.className === ModalCSS.Overlay) {
       eventFunction();
@@ -22,7 +22,7 @@ export const Modal = ({ eventFunction, imageLink }) => {
 
   useEffect(
     () => document.removeEventListener('keydown', handleKeyDown.bind(this)),
-    [handleKeyDown]
+    [eventFunction]
   );
 
   return (
