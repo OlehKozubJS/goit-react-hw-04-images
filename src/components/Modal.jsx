@@ -6,6 +6,7 @@ export const Modal = ({ eventFunction, imageLink }) => {
   const handleKeyDown = event => {
     if (event.key === 'Escape') {
       eventFunction();
+      console.log('Hey!');
       document.removeEventListener('keydown', handleKeyDown);
     }
   };
