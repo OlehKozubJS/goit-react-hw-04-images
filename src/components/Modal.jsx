@@ -3,16 +3,6 @@ import ModalCSS from './styles/Modal.module.css';
 import propTypes from 'prop-types';
 
 export const Modal = ({ eventFunction, imageLink }) => {
-  useEffect(
-    () => document.addEventListener('keydown', handleKeyDown.bind(this)),
-    []
-  );
-
-  useEffect(
-    () => document.removeEventListener('keydown', handleKeyDown.bind(this)),
-    [handleKeyDown]
-  );
-
   const handleKeyDown = event => {
     if (event.key === 'Escape') {
       eventFunction();
@@ -25,8 +15,18 @@ export const Modal = ({ eventFunction, imageLink }) => {
     }
   };
 
+  useEffect(
+    () => document.addEventListener('keydown', handleKeyDown.bind(this)),
+    []
+  );
+
+  useEffect(
+    () => document.removeEventListener('keydown', handleKeyDown.bind(this)),
+    [handleKeyDown]
+  );
+
   return (
-    <div onClick={this.handleClick} className={ModalCSS.Overlay}>
+    <div onClick={handleClick} className={ModalCSS.Overlay}>
       <div className={ModalCSS.Modal}>
         <img src={imageLink} alt="" />
       </div>
