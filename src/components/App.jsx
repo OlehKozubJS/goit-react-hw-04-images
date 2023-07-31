@@ -45,7 +45,17 @@ export const App = () => {
       }
     }
     fetchData();
-  }, [isLoading, searchResult, page, images, isLoadMore, totalHits, isError]);
+  }, [
+    isLoading,
+    searchResult,
+    page,
+    images,
+    isLoadMore,
+    totalHits,
+    isError,
+    prevPage,
+    prevSearchResult,
+  ]);
 
   const openModal = largeImageLink => {
     setIsModal(true);
