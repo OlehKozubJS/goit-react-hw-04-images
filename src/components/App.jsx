@@ -18,13 +18,6 @@ export const App = () => {
   const [isModal, setIsModal] = useState(false);
   const [modalImageLink, setModalImageLink] = useState('');
 
-  const getSearchResults = searchResultData => {
-    setSearchResult(searchResultData);
-    setImages([]);
-    setPage(1);
-    fetchData();
-  };
-
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -38,6 +31,14 @@ export const App = () => {
       setIsLoading(false);
     }
   };
+
+  const getSearchResults = searchResultData => {
+    setSearchResult(searchResultData);
+    setImages([]);
+    setPage(1);
+    fetchData();
+  };
+
   /*
   useEffect(() => {
     fetchData();
