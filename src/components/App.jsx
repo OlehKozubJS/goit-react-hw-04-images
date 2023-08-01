@@ -51,25 +51,20 @@ export const App = () => {
     setModalImageLink(largeImageLink);
   };
 
-  const closeModal = () => {
-    setIsModal(false);
-  };
-
-  const loadMoreFunction = () => {
-    setPage(page + 1);
-  };
-
   return (
     <div className={ImageFinderCSS.App}>
       {isModal && (
-        <Modal eventFunction={closeModal} imageLink={modalImageLink} />
+        <Modal
+          eventFunction={() => setIsModal(false)}
+          imageLink={modalImageLink}
+        />
       )}
       <Searchbar submitFunction={getSearchResults} />
       {isLoading && <Loader />}
       <ImageGallery imageGalleryItems={images} itemClickFunction={openModal} />
       {images.length > 0 &&
         (isLoadMore ? (
-          <Button clickFunction={loadMoreFunction} />
+          <Button clickFunction={() => setPage(page + 1)} />
         ) : (
           !isLoadMore && (
             <div className={ImageFinderCSS.NoMoreMessage}>
