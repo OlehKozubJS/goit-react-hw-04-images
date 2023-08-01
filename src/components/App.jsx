@@ -44,7 +44,7 @@ export const App = () => {
       }
     };
     fetchData();
-  }, [searchResult, page, isLoadMore, totalHits]);
+  }, [searchResult, page]);
 
   const openModal = largeImageLink => {
     setIsModal(true);
