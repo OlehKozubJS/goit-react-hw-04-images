@@ -12,7 +12,7 @@ export const App = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [searchResult, setSearchResult] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [totalHits, setTotalHits] = useState(0);
   const [isLoadMore, setIsLoadMore] = useState(false);
@@ -33,8 +33,8 @@ export const App = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        let imagesData = await fetchImages(searchResult, page);
-        setImages([...images, ...imagesData.hits]);
+        let imagesData = await fetchImages(searchQuery, page);
+        setImages(prevState => [...prevState, ...imagesData.hits]);
         setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
         setTotalHits(imagesData.totalHits);
       } catch (error) {
@@ -44,27 +44,32 @@ export const App = () => {
       }
     };
     fetchData();
-  }, [searchResult, page]);
+  }, [searchQuery, page]);
 
   const openModal = largeImageLink => {
     setIsModal(true);
     setModalImageLink(largeImageLink);
   };
 
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
+  const loadMoreImages = () => {
+    setPage(prevState => prevState + 1);
+  };
+
   return (
     <div className={ImageFinderCSS.App}>
       {isModal && (
-        <Modal
-          eventFunction={() => setIsModal(false)}
-          imageLink={modalImageLink}
-        />
+        <Modal eventFunction={closeModal} imageLink={modalImageLink} />
       )}
       <Searchbar submitFunction={getSearchResults} />
       {isLoading && <Loader />}
       <ImageGallery imageGalleryItems={images} itemClickFunction={openModal} />
       {images.length > 0 &&
         (isLoadMore ? (
-          <Button clickFunction={() => setPage(page + 1)} />
+          <Button clickFunction={loadMoreImages} />
         ) : (
           !isLoadMore && (
             <div className={ImageFinderCSS.NoMoreMessage}>
