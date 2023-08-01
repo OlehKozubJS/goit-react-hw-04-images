@@ -25,7 +25,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    if (searchQuery) {
+    if (!searchQuery) {
       return;
     }
     const fetchData = async () => {
