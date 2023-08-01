@@ -69,11 +69,9 @@ export const App = () => {
         (isLoadMore ? (
           <Button clickFunction={loadMoreImages} />
         ) : (
-          !isLoadMore && (
-            <div className={ImageFinderCSS.NoMoreMessage}>
-              We're sorry, but you've reached the end of search results.
-            </div>
-          )
+          <div className={ImageFinderCSS.NoMoreMessage}>
+            We're sorry, but you've reached the end of search results.
+          </div>
         ))}
     </div>
   );
