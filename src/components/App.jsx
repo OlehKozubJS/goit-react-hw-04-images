@@ -10,10 +10,8 @@ import { useState, useEffect } from 'react';
 export const App = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [totalHits, setTotalHits] = useState(0);
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [modalImageLink, setModalImageLink] = useState('');
@@ -34,9 +32,8 @@ export const App = () => {
         let imagesData = await fetchImages(searchQuery, page);
         setImages(prevState => [...prevState, ...imagesData.hits]);
         setIsLoadMore(page < Math.ceil(imagesData.totalHits / 12));
-        setTotalHits(imagesData.totalHits);
       } catch (error) {
-        setIsError(true);
+        console.log('Error');
       } finally {
         setIsLoading(false);
       }
