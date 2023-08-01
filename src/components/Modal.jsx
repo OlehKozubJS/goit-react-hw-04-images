@@ -13,7 +13,7 @@ export const Modal = ({ eventFunction, imageLink }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [eventFunction]);
 
   const handleClick = event => {
     if (event.target.className === ModalCSS.Overlay) {
